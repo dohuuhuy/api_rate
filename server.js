@@ -4,8 +4,6 @@ const db = require("./app/models/db");
 const app = express();
 const dbConfig = require("./config/database.config.js");
 const mongoose = require("mongoose");
-const worktime = require("./app/routes/worktime.router");
-const sp = require("./app/routes/sp.routes");
 const rate = require("./app/routes/Rate");
 const PORT = process.env.PORT || 81;
   app.use(bodyParser.urlencoded({ extended: true }));
