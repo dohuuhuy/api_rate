@@ -91,7 +91,21 @@ exports.getlisttaikham = async (req, res) => {
 };
 
 
-exports.NewBookingByPartnerID = (req, res) => {};
+exports.NewBookingByPartnerID = async (req, res) => {
+  var x = req.params.fromDate;
+  var y = req.params.toDate;
+
+  (collection = "booking"),
+    (objparam = {
+      date_create: {
+        $gte: new Date(x),
+        $lte: new Date(y),
+      },
+    }),
+    (x = await db.findBY(collection, objparam).toArray());
+
+  res.send({ message: x });
+};
 
 exports.TinhTiLe = async (req, res) => {
   var x = (req.params.fromDate = "2019-08-23T11:24:48.000+0000");

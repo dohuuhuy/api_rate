@@ -5,7 +5,7 @@ const app = express();
 const dbConfig = require("./config/database.config.js");
 const mongoose = require("mongoose");
 const rate = require("./app/routes/Rate");
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 3000;
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(bodyParser.json());
 
