@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon server.js",
     "start": "nodemon server.js",
-    "consumer": "nodemon kafka/consumer.app.js",
+    "consumer": "nodemon kafka/sv_consumer.js",
     "producer":"nodemon kafka/producer.app.js"
   },
   "author": "",

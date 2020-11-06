@@ -1,6 +1,8 @@
 var express = require("express");
 var kafka = require("kafka-node");
 var app = express();
+const config = require("../config/kafka.config");
+
 
 var bodyParser = require("body-parser");
 app.use(bodyParser.json()); // to support JSON-encoded bodies
@@ -12,7 +14,7 @@ app.use(
 );
 
 var Producer = kafka.Producer,
-  client = new kafka.KafkaClient({ kafkaHost: "103.125.170.22:10158" }),
+  client = new kafka.KafkaClient({ kafkaHost: config.kafkaHost }),
   producer = new Producer(client);
 
 producer.on("ready", function () {
@@ -36,6 +38,6 @@ app.post("/sendMsg", function (req, res) {
   });
 });
 
-app.listen(5001, function () {
-  console.log("Kafka producer running at 5001");
+app.listen(5000, function () {
+  console.log("Producer running at 5000");
 });

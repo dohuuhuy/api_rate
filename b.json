@@ -1,0 +1,12 @@
+{
+    "topic": "Topic1",
+    "message": {
+        "patientId": 1113080,
+        "BookingID": "String",
+        "Platform": "String",
+        "PatnerId": "String",
+        "FirstBooking": 1,
+        "ReturnBooking": 1,
+        "RebookingFromList": 1
+    }
+}

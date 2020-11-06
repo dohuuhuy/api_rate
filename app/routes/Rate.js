@@ -10,5 +10,9 @@ router.get(
   callRate.NewBookingByPartnerID
 );
 
+router.post("/flagForBooking", callRate.flagForBooking);
+const svConsumer = require("../../kafka/consumer");
+
+router.get("/consum", svConsumer.kafkaConsumer);
 
 module.exports = router;
