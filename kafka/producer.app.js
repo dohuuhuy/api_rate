@@ -5,10 +5,9 @@ const config = require("../config/kafka.config");
 
 
 var bodyParser = require("body-parser");
-app.use(bodyParser.json()); // to support JSON-encoded bodies
+app.use(bodyParser.json()); 
 app.use(
   bodyParser.urlencoded({
-    // to support URL-encoded bodies
     extended: true,
   })
 );
@@ -30,7 +29,7 @@ app.get("/", function (req, res) {
   res.json({ greeting: "Kafka Producer" });
 });
 
-app.post("/sendMsg", function (req, res) {
+app.post("/flagReexamBooking", function (req, res) {
   var sentMessage = JSON.stringify(req.body.message);
   payloads = [{ topic: req.body.topic, messages: sentMessage, partition: 0 }];
   producer.send(payloads, function (err, data) {

@@ -77,7 +77,7 @@ exports.getlisttaikham = async (req, res) => {
     .toArray();
 
   let tutorials = [];
-  for (const v of list_TaiKham) {
+  for (const v of list_TaiKham) {  
     tutorials.push({
       SoHoSo: v.SoHoSo,
       MaDonVi: v.MaDonVi,
@@ -85,7 +85,7 @@ exports.getlisttaikham = async (req, res) => {
       fullname: v.patient_promo.surname + " " + v.patient_promo.name,
       birthyear: v.patient_promo.birthyear,
       mobile: v.patient_promo.mobile,
-      tinh: v.dm_city[0].name,
+      tinh: v.dm_city[0].name,   
       NgayKham: moment(v.NgayKham).format("YYYY-MM-DD HH:mm:ss"),
     });
   }
