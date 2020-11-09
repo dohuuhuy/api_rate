@@ -23,11 +23,17 @@ start_server = async () => {
   } catch (error) {
     console.log("Not connection Database !");
   }
-  app.use("/", rate);
+  app.get("/", function (req, res) {
+    res.json({ greeting: "Kafka Producer" });
+  });
+  //app.use("/api", rate);
+
   app.listen(PORT, () => {
     console.log(
       `Consumer is running on port ${PORT}. \n\n -----------------Console.log()--------------------------`
     );
   });
+  const svConsumer = require("./consumer");
+  svConsumer.kafkaConsumer();
 };
 start_server();

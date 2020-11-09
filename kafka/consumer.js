@@ -4,6 +4,7 @@ const callRate = require("../app/controllers/callRate.controller");
 const db = require("../app/models/db");
 
 exports.kafkaConsumer = (req, res) => {
+
   try {
     const Consumer = kafka.Consumer;
     const client = new kafka.KafkaClient({
@@ -17,9 +18,10 @@ exports.kafkaConsumer = (req, res) => {
       encoding: "utf8",
       fromOffset: false,
     });
-
+    console.log(consumer);
     consumer.on("message", async function (message) {
       handledata = JSON.parse(message.value);
+      console.log(handledata);
       handleMessage(handledata, res);
     });
     consumer.on("error", function (error) {
@@ -32,6 +34,7 @@ exports.kafkaConsumer = (req, res) => {
 
 let handleMessage = async (msg, res) => {
   var result = {};
+  console.log(msg);
   for (const key in msg) {
     switch (key) {
       case "patientId":
@@ -49,10 +52,10 @@ let handleMessage = async (msg, res) => {
 
   if (result.status == 0) {
     console.log("lỗi : " + result.message);
-    await res.send({ message: result.message });
+ //   await res.send({ message: result.message });
   } else {
     console.log("msg :>> ", msg);
-    await res.send({ message: msg });
+ //   await res.send({ message: msg });
     callRate.flagForBooking2(msg);
   }
 };

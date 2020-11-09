@@ -35,6 +35,7 @@ app.post("/flagReexamBooking", function (req, res) {
   producer.send(payloads, function (err, data) {
     res.json(data);
   });
+  //res.json(req.body.message)
 });
 
 app.listen(5000, function () {
