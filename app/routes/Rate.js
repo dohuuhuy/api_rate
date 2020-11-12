@@ -1,18 +1,9 @@
-var router = require("express").Router();
+const { get_list_taikham_by_date, flagBooking, demo1 } = require("../controllers/staticTaiKham.controller");
 
-const callRate = require("../controllers/callRate.controller");
+var Route = require("express").Router();
 
-router.get("/getListReExamByDate/:fromDate/:toDate", callRate.getlisttaikham);
-//router.get("/getListReExamByDate", callRate.demo);
-router.get("/getRate", callRate.TinhTiLe);
-router.get(
-  "/newBookingByDate/:fromDate/:toDate",
-  callRate.NewBookingByPartnerID
-);
+Route.get("/get_list_taikham_by_date/:fromDate/:toDate", get_list_taikham_by_date);
 
-router.post("/flagForBooking", callRate.flagForBooking);
-const svConsumer = require("../../kafka/consumer");
+Route.post('/flag_booking', flagBooking)
 
-router.get("/consum", svConsumer.kafkaConsumer);
-
-module.exports = router;
+module.exports = Route;

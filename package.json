@@ -5,9 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon server.js",
-    "start": "nodemon server.js",
-    "consumer": "nodemon kafka/sv_consumer.js",
-    "producer": "nodemon kafka/producer.app.js"
+    "start": "nodemon server.js"
   },
   "author": "",
   "license": "ISC",
@@ -22,7 +20,9 @@
     "kafka-node": "^5.0.0",
     "moment": "^2.29.1",
     "mongodb": "^3.6.2",
-    "mongoose": "^5.10.9",
+    "mongoose": "^5.10.13",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.2.5",
     "node-excel-export": "^1.4.4",
     "nodemon": "^2.0.6",
     "request-ip": "^2.1.3"
