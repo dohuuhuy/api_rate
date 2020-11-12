@@ -75,7 +75,7 @@ AddRows = (tutorials, res) => {
 
 exports.flagBooking = async (req, res) => {
   let obj = req.body;
-  let patientId = req.body.patientId;
+  let patientId = obj.patientId;
   console.log("object :>> ", patientId);
 
   var x = await CheckTaiKham(patientId);
@@ -84,8 +84,9 @@ exports.flagBooking = async (req, res) => {
   if (x) {
     obj.FirstBooking = 1;
     await save_flag_booking(obj);
+    res.send({ status:200, message: "flag re-exam booking success" });
   } else {
-    res.send({ ms: "flag booking fails" });
+    res.send({ ms: "flag re-exam booking fails" });
   }
 };
 
