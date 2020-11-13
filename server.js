@@ -14,6 +14,9 @@ start_server = async () => {
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(bodyParser.json());
   app.use('/api',rate)
+  app.get('/',(req,res)=>{
+    res.send({ms:"wellcome to TaiKham"})
+  })
 
   app.listen(process.env.PORT || 3000, () => {
     console.log(

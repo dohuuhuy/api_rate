@@ -82,7 +82,7 @@ exports.flagBooking = async (req, res) => {
   console.log("flag :>> ", x);
 
   if (x) {
-    obj.FirstBooking = 1;
+    obj.RebookingFromList = 1;
     await save_flag_booking(obj);
     res.send({ status:200, message: "flag re-exam booking success" });
   } else {
