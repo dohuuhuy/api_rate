@@ -5,4 +5,4 @@
     RUN npm install  
     COPY . /app  
     EXPOSE 3000  
-    CMD node serverserver.js
+    CMD node server.js
