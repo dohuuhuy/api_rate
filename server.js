@@ -18,7 +18,7 @@ start_server = async () => {
     res.send({ms:"wellcome to TaiKham"})
   })
 
-  const PORT = process.env.PORT || 80 ;
+  const PORT = process.env.PORT || 3000 ;
   app.listen(PORT, () => {
     console.log(
       `Server is running on port http://localhost:${PORT}. \n\n -----------------Console.log()--------------------------`
