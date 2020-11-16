@@ -9,7 +9,7 @@ const rate = require("./app/routes/Rate");
 
 start_server = async () => {
 
-  setInterval(async_list_TaiKham, 1200000);
+  setInterval(async_list_TaiKham, 12000);
 
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(bodyParser.json());
@@ -18,9 +18,10 @@ start_server = async () => {
     res.send({ms:"wellcome to TaiKham"})
   })
 
-  app.listen(process.env.PORT || 3000, () => {
+  const PORT = process.env.PORT || 80 ;
+  app.listen(PORT, () => {
     console.log(
-      `Server is running on port 3000. \n\n -----------------Console.log()--------------------------`
+      `Server is running on port http://localhost:${PORT}. \n\n -----------------Console.log()--------------------------`
     );
   });
 };

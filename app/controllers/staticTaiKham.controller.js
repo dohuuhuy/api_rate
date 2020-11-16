@@ -74,19 +74,28 @@ AddRows = (tutorials, res) => {
 };
 
 exports.flagBooking = async (req, res) => {
-  let obj = req.body;
-  let patientId = obj.patientId;
-  console.log("object :>> ", patientId);
+  const obj_conditon_check_Patient = {
+    bvdhyd_msbn: req.body.patient.bvdhyd_msbn,
+    mobile: req.body.patient.mobile,
+  };
 
-  var x = await CheckTaiKham(patientId);
-  console.log("flag :>> ", x);
+  const rs = await CheckTaiKhamx(obj_conditon_check_Patient);
+  console.log("flag :>> ", rs);
 
-  if (x) {
-    obj.RebookingFromList = 1;
+  if (rs.status == true) {
+    req.body.RebookingFromList = 1;
+    const obj = {
+      bookingID: req.body.id,
+      platform: req.body.platform,
+      booking_date: req.body.booking_date,
+      patnerId: "UMC",
+      reBookingFromList: 1,
+  
+    };
     await save_flag_booking(obj);
-    res.send({ status:200, message: "flag re-exam booking success" });
+    res.send({ status: 200, message: "flag re-exam booking success" });
   } else {
-    res.send({ ms: "flag re-exam booking fails" });
+    res.send({ status: 500,  message: rs.ms });
   }
 };
 
@@ -94,7 +103,7 @@ save_flag_booking = async (obj) => {
   try {
     await connect();
     try {
-      console.log(obj);
+      //  console.log(obj);
       const Newflagbooking = new flag_reexam_booking(obj);
 
       Newflagbooking.save()
@@ -104,6 +113,43 @@ save_flag_booking = async (obj) => {
         .catch((err) => {
           console.log(err);
         });
+    } catch (error) {
+      console.log(error);
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+CheckTaiKhamx = async (object) => {
+  try {
+    const db = await loadDB();
+    try {
+      let rs = "";
+      console.log("object :>> ", object);
+
+      for (const key in object) {
+        console.log("key", key);
+        switch (key) {
+          case "bvdhyd_msbn":
+            const x = await db
+              .collection("List_TaiKham")
+              .findOne({ "So Ho So": object.bvdhyd_msbn });
+            console.log("bvdhyd_msbn:>> ", x);
+            rs = x ? { status: true } : { status: false, ms: "No msbn" };
+          //  break;
+          // case "mobile":
+          //   const y = await db
+          //     .collection("List_TaiKham")
+          //     .findOne({ "Dien Thoai": object.mobile });
+          //   console.log("mobile:>> ", y);
+          //   rs = y ? { status: true } : { status: false, ms: "No mobile" };
+          // //   break;
+          default:
+            break;
+        }
+      }
+      return rs;
     } catch (error) {
       console.log(error);
     }
