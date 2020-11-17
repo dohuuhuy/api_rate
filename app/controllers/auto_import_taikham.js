@@ -22,8 +22,8 @@ NosqlQuery = async (results) => {
   try {
     const db = await loadDB();
     try {
-      await db.collection("List_TaiKham").insertMany(results);
-      console.log("done !");
+     var x =  await db.collection("List_TaiKham").insertMany(results);
+      console.log("Thêm vào DB:>> !", x);
     } catch (error) {
       //   return error;
     }
@@ -32,7 +32,7 @@ NosqlQuery = async (results) => {
   }
 };
 
-find_fromDate = async (results) => {
+find_fromDate = async () => {
   try {
     const db = await loadDB();
     try {
@@ -57,15 +57,18 @@ find_fromDate = async (results) => {
 exports.async_list_TaiKham = async () => {
   var moment = require("moment");
 
-  console.log(moment(await find_fromDate()).format("YYYY-MM-DD HH:mm:ss"));
   let fromDate =
     (await find_fromDate()) == false
       ? ""
       : moment(await find_fromDate()).format("YYYY-MM-DD HH:mm:ss");
+
   let toDate = moment().format("YYYY-MM-DD HH:mm:ss");
 
+  console.log("fromDate :>> ", fromDate);
+  console.log("toDate :>> ", toDate);
+
   const results = await mysqlQuery(fromDate, toDate);
-  console.log("1 :>> ", results.length);
+  console.log("record_Add_New :>> ", results.length);
   await NosqlQuery(results);
 };
 exports.demo = async () => {};
